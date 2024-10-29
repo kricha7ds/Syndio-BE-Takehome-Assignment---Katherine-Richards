@@ -1,13 +1,9 @@
 from flask import Flask, jsonify, request
-import os
-from dotenv import load_dotenv
 import sqlite3
 from contextlib import contextmanager
 
 import statsmodels.api as sm
 import pandas as pd
-
-load_dotenv()
 
 app = Flask(__name__)
 
@@ -20,6 +16,10 @@ def db_connection():
   finally:
     connection.close()
 
+"""
+  Calculate a multiple linear regression model
+  including both numeric and categorical features.
+"""
 def calculate_mlr(department):
   with db_connection() as conn:
     try:
@@ -65,7 +65,5 @@ def pvalue():
   except Exception as e:
     return jsonify({"success": False, "error": "Internal server error"}), 500
 
-
 if __name__ == "__main__":
-  port = int(os.environ.get("FLASK_PORT", 5000))
-  app.run(port=port, debug=True)
+  app.run(debug=True)

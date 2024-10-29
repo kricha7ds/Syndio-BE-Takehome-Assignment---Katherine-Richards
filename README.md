@@ -17,9 +17,10 @@ sqlite> SELECT * FROM employees;
 ```
 
 Create an API with an endpoint `/pvalue` that:
-* reads the employee data for employees belonging to a specified department from the `employees.db` SQLite database
-* uses the employee data to run an OLS regression with independent variables `protected_class`, `tenure`, and `performance` and dependent variable `compensation` that includes all employees in the specified department
-* returns the OLS model pvalue associated with `protected_class` rounded to 3 decimal places in a JSON response like the one below:
+
+- reads the employee data for employees belonging to a specified department from the `employees.db` SQLite database
+- uses the employee data to run an OLS regression with independent variables `protected_class`, `tenure`, and `performance` and dependent variable `compensation` that includes all employees in the specified department
+- returns the OLS model pvalue associated with `protected_class` rounded to 3 decimal places in a JSON response like the one below:
 
 ```
 {"pvalue": 0.053}
@@ -60,3 +61,45 @@ If you're unfamiliar with OLS regressions, you may find [this resource](https://
 - If the API works, and returns what we requested, it's a success!
 - We truly value your time and just want a basic benchmark and common piece of code to use in future interviews.
 - If we bring you in for the next round of interviews we'll ask you some questions about your submission and also expand on it.
+
+---
+
+## Instructions
+
+At the project root, do the following:
+
+1. Create a virtual environment
+
+```
+python3 -m venv venv
+```
+
+2. Activate the virtual environment
+
+```
+source venv/bin/activate
+```
+
+3. Install app dependencies
+
+```
+pip install -r requirements.txt
+```
+
+4. Export environment variable with desired port
+
+```
+export FLASK_RUN_PORT=<desired_port>
+```
+
+5. Run the API
+
+```
+flask run
+```
+
+6. Make a request to the API on the desired port
+
+```
+curl --location 'http://localhost:5000/pvalue?department=engineering'
+```
